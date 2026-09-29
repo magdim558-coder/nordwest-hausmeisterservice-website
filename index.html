@@ -529,11 +529,10 @@
       <div class="cta-card">
         <h3>Bereit für Ihre Anfrage?</h3>
         <p>Schildern Sie uns kurz Ihr Anliegen — wir antworten zeitnah mit einer Einschätzung.</p>
-        <form id="contact-form" name="kontakt" method="POST">
-          <input type="hidden" name="_subject" value="Neue Anfrage über die Website">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <p class="hp-field"><label>Nicht ausfüllen: <input name="_honey"></label></p>
+        <form id="contact-form" name="kontakt" method="POST" action="https://api.web3forms.com/submit">
+          <input type="hidden" name="access_key" value="HIER_ACCESS_KEY_EINFÜGEN">
+          <input type="hidden" name="subject" value="Neue Anfrage über die Website">
+          <p class="hp-field"><label>Nicht ausfüllen: <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"></label></p>
           <div class="form-row">
             <label for="cf-name">Name</label>
             <input type="text" id="cf-name" name="name" placeholder="Ihr Name" required>
@@ -594,22 +593,56 @@
   (function(){
     var form = document.getElementById('contact-form');
     if(!form) return;
+    var btn = form.querySelector('button[type="submit"]');
+    var btnLabel = btn.textContent;
+    var status = document.getElementById('cf-status');
+
+    function mailtoLink(){
+      var name = form.elements['name'].value;
+      var email = form.elements['email'].value;
+      var phone = form.elements['phone'].value;
+      var message = form.elements['message'].value;
+      var subject = 'Anfrage über die Website' + (name ? ' – ' + name : '');
+      var body = 'Name: ' + name + '\n' +
+                 'E-Mail: ' + email + '\n' +
+                 'Telefon: ' + (phone || '-') + '\n\n' +
+                 'Anliegen:\n' + message;
+      return 'mailto:nordwest.hausmeisterservice@gmail.com' +
+             '?subject=' + encodeURIComponent(subject) +
+             '&body=' + encodeURIComponent(body);
+    }
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var status = document.getElementById('cf-status');
-      var data = new FormData(form);
-      fetch('https://formsubmit.co/ajax/nordwest.hausmeisterservice@gmail.com', {
+      if(btn.disabled) return;
+      btn.disabled = true;
+      btn.textContent = 'Wird gesendet …';
+      status.textContent = '';
+      status.className = 'cf-status';
+
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {'Accept': 'application/json'},
-        body: data
+        body: new FormData(form)
       }).then(function(res){
-        if(!res.ok) throw new Error('network');
+        return res.json().catch(function(){ return {}; });
+      }).then(function(json){
+        if(json.success !== true) throw new Error(json.message || 'send failed');
         status.textContent = 'Danke! Ihre Anfrage wurde gesendet — wir melden uns zeitnah.';
         status.className = 'cf-status ok';
         form.reset();
       }).catch(function(){
-        status.textContent = 'Da ist leider etwas schiefgelaufen. Bitte schreiben Sie uns direkt per E-Mail.';
         status.className = 'cf-status err';
+        status.textContent = 'Da ist leider etwas schiefgelaufen. Bitte senden Sie uns Ihre Anfrage direkt per E-Mail: ';
+        var link = document.createElement('a');
+        link.href = mailtoLink();
+        link.textContent = 'E-Mail mit Ihren Angaben öffnen';
+        link.style.color = 'inherit';
+        link.style.textDecoration = 'underline';
+        status.appendChild(link);
+      }).then(function(){
+        btn.disabled = false;
+        btn.textContent = btnLabel;
       });
     });
   })();
