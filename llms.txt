@@ -1,0 +1,23 @@
+# Nord-West Hausmeisterservice
+
+> Hausmeister- und Gebäudeservice in Meppen und Umgebung (Emsland): Hausmeister- & Gebäudeservice inkl. Gebäudekontrolle/Kontrollgänge, Kabelzug & Netzwerkarbeiten, Kleinreparaturen & Montage, Garten- und Grundstückspflege (Pflege von Außenanlagen).
+
+Inhaber: Magdi Abbas. Gelernter Elektriker – unterstützt als Subunternehmer für Elektrofirmen bei vorbereitenden, nicht meisterpflichtigen Arbeiten (z. B. Kabelzug, Schlitzen, Stemmen, Kernbohrungen). Führt keine eigenständigen Elektroinstallationen oder elektrischen Anschlussarbeiten durch.
+
+Reinigungsarbeiten/Gebäudereinigung werden nicht angeboten. Winterdienst ist derzeit nur auf Anfrage in Prüfung und kein fester Bestandteil des Leistungsangebots.
+
+Adresse: Jungblutstraße 6, 49716 Meppen, Deutschland
+Telefon: 0174 4570060
+E-Mail: nordwest.hausmeisterservice@gmail.com
+
+Einsatzgebiet: Meppen, Haren, Haselünne, Lingen, Geeste, Twist, Papenburg und das übrige Emsland
+
+## Leistungen
+- Hausmeister & Gebäudeservice (Betreuung, Instandhaltung, Kontrollgänge / Gebäudekontrolle)
+- Kabelzug & Netzwerkarbeiten
+- Kleinreparaturen & Montage
+- Garten- und Grundstückspflege (Pflege von Außenanlagen)
+
+## Seiten
+- [Startseite](https://magdim558-coder.github.io/nordwest-hausmeisterservice-website/): Leistungen, Kundenbewertungen, Kontaktformular, Standort
+- [Impressum & Datenschutz](https://magdim558-coder.github.io/nordwest-hausmeisterservice-website/rechtliches.html)
